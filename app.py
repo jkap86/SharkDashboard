@@ -61,9 +61,19 @@ def index():
 	'652217600155160576'
 	]
 
+	leaguesp = [
+	'587545694395465728',
+	'587690400039346176',
+	'587700255940714496',
+	'587702052977680384',
+	'589705847521718272',
+	'589878481194622976'
+
+	]
+
 	leaguesDict = []
 	members = []
-	for league in leagues:
+	for league in leaguesp:
 		link = requests.get('https://api.sleeper.app/v1/league/' + league)
 		leaguesDict.append({
 			'name': link.json()['name'],
@@ -75,10 +85,11 @@ def index():
 			members.append({
 				'name': getUsernamefromUserID(roster['owner_id']),
 				'league': link.json()['name'],
-				'wins': roster['metadata']['record'].count('W'),
-				'losses': roster['metadata']['record'].count('L'),
-				'fpts': roster['settings']['fpts']
+				'wins': roster['settings']['wins'],
+				'losses': roster['settings']['losses'],
+				'fpts': str(roster['settings']['fpts']) + "." + str(roster['settings']['fpts_decimal']),
+				'fpts_against': str(roster['settings']['fpts_against']) + "." + str(roster['settings']['fpts_against_decimal'])
 				})
-	members = sorted(members, key=lambda x:x['wins'], reverse=True)
+	members = sorted(members, key=lambda x:(x['wins'], x['fpts']), reverse=True)
 
 	return render_template('index.html', leaguesDict=leaguesDict, members=members)
