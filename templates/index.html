@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>
+	<ul class="leagues-list">
+		{% for league in leaguesDict %}
+		<li><img src="{{  league['avatar']  }}">{{  league['name']  }}</li>
+		{% endfor %}
+	</ul>
+</h2>
+
+<table style="width: 90%; margin: auto;">
+	{% for member in members %}
+	<tr>
+		<td>{{  member['name']  }}</td>
+		<td>{{  member['league']  }}</td>
+		<td>Wins: {{  member['wins']  }}</td>
+		<td>Losses: {{  member['losses']  }}</td>
+		<td>Fantasy Points: {{  member['fpts']  }}</td>
+	</tr>
+	{% endfor %}
+</table>
+{% endblock %}

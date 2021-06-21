@@ -1,0 +1,30 @@
+h1 {
+	text-align: center;
+}
+
+h2 {
+	text-align: center;
+}
+
+ul li {
+	list-style: none;
+	display: inline;
+}
+
+ul li:hover {
+	color: red;
+	cursor: pointer;
+}
+
+img {
+	border-radius: 50%;
+}
+
+.leagues-list {
+	white-space: nowrap;
+	overflow: scroll;
+}
+
+tr:hover {
+	background-color: yellow;
+}
